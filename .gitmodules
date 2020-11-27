@@ -1,0 +1,3 @@
+[submodule "flipl/external/vcpkg"]
+	path = flipl/external/vcpkg
+	url = https://github.com/microsoft/vcpkg.git

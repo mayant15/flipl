@@ -1,5 +1,2 @@
-timeline {
-    fps: 24
-    0  24 frames/newton_1.png
-    24 48 frames/newton_2.png
-}
+frames/newton_1.png
+frames/newton_2.png
