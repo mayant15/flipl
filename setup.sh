@@ -5,3 +5,4 @@ chmod +x ./bootstrap-vcpkg.sh
 source ./bootstrap-vcpkg.sh
 
 ./vcpkg install graphicsmagick
+./vcpkg install yaml-cpp

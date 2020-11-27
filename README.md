@@ -8,4 +8,4 @@ flipl (pronounced "flipple") is a description language for writing GIFs from ima
 
 See `docs/Getting-Started.md` for an introduction to the program.
 
-Time Taken: 2.5 hr
+Time Taken: 5hr

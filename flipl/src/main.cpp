@@ -1,10 +1,8 @@
 #include <iostream>
-#include <fstream>
-#include <vector>
-#include <string>
-#include <algorithm>
 
-#include "Magick++.h"
+#include "parser.h"
+#include "timeline.h"
+#include "generator.h"
 
 int main(int argc, char* argv[])
 {
@@ -15,38 +13,18 @@ int main(int argc, char* argv[])
     }
 
     std::string sourceFile (argv[1]);
-
 #ifdef _WIN32
     // Replace slash for Windows filepaths
     std::replace(sourceFile.begin(), sourceFile.end(), '\\', '/');
 #endif
 
-    std::string rootDir =  sourceFile.substr(0, sourceFile.find_last_of('/') + 1);
-
-    std::cout << rootDir << std::endl;
-
-    // Read image paths
-    std::ifstream in (argv[1]);
-    std::string line;
-    std::vector<std::string> framePaths;
-    while (std::getline(in, line))
+    flipl::AST ast (sourceFile);
+    flipl::Timeline timeline (ast);
+    flipl::Generator gen;
+    if (gen.GenerateFrames(timeline))
     {
-        framePaths.push_back(rootDir + line);
+        gen.WriteOut("sample.gif");
     }
-
-#ifdef _WIN32
-    // Magick must be initialized on Windows
-    Magick::InitializeMagick(MAGICK_DLLS);
-#endif
-
-    std::vector<Magick::Image> frames;
-
-    for (const auto& path : framePaths)
-    {
-        frames.emplace_back(path);
-    }
-
-    Magick::writeImages(frames.begin(), frames.end(), "sample.gif");
 
     return 0;
 }
