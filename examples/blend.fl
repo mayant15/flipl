@@ -1,0 +1,14 @@
+timeline:
+  fps: 24
+  channels:
+    - background:
+        - start: 0
+          end: 12
+          source: frames/blend_bg.png
+#    - foreground:
+#        - start: 0
+#          end: 6
+#          source: frames/blend_1.png
+#        - start: 6
+#          end: 12
+#          source: frames/blend_2.png

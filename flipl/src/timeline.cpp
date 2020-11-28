@@ -5,9 +5,21 @@ namespace flipl
     Timeline::Timeline(const AST& ast)
     {
         YAML::Node root = ast.root;
-        if (auto slotNodes = root["timeline"]["channel"])
+
+        if (!root["timeline"])
+        {
+            throw std::exception("Input file has no timeline");
+        }
+
+        if (!root["timeline"]["channels"] || !root["timeline"]["channels"].IsSequence())
+        {
+            throw std::exception("Input file has no channels");
+        }
+
+        for (const auto& channelNode : root["timeline"]["channels"])
         {
             auto channel = std::make_shared<Channel>();
+            channelNode.
             unsigned int maxEnd = 0;
             for (auto slotNode : slotNodes)
             {

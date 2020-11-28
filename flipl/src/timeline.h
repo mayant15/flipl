@@ -24,6 +24,7 @@ namespace flipl
      */
     struct Channel
     {
+        std::string name;
         std::vector<SRef<Slot>> slots;
     };
 
@@ -32,21 +33,33 @@ namespace flipl
      */
     class Timeline
     {
-    public:
         unsigned int fps;
+        unsigned int lastFrame;
         std::vector<SRef<Channel>> channels;
-
-    private:
-        unsigned int timelineEnd;
 
     public:
         explicit Timeline(const AST& ast);
 
         SRef<Slot> GetSlotForFrame(unsigned int frame) const;
 
-        inline unsigned int End() const
+        unsigned int End() const
         {
-            return timelineEnd + 1;
+            return lastFrame + 1;
+        }
+
+        size_t NumChannels() const
+        {
+            return channels.size();
+        }
+
+        const std::vector<SRef<Channel>>& GetChannels() const
+        {
+            return channels;
+        }
+
+        unsigned int GetFPS() const
+        {
+            return fps;
         }
     };
 }

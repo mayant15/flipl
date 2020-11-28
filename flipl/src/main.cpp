@@ -18,12 +18,19 @@ int main(int argc, char* argv[])
     std::replace(sourceFile.begin(), sourceFile.end(), '\\', '/');
 #endif
 
-    flipl::AST ast (sourceFile);
-    flipl::Timeline timeline (ast);
-    flipl::Generator gen;
-    if (gen.GenerateFrames(timeline))
+    try
     {
-        gen.WriteOut("sample.gif");
+        flipl::AST ast (sourceFile);
+        flipl::Timeline timeline (ast);
+        flipl::Generator gen;
+        if (gen.GenerateFrames(timeline))
+        {
+            gen.WriteOut("sample.gif");
+        }
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
     }
 
     return 0;
